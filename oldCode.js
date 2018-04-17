@@ -32,6 +32,11 @@ function singleRound(playerSelection, computerSelection) {
   }
 }
 
+function normalizeSelection(str) {
+  const lowerCase = str.toLowerCase();
+  return lowerCase.replace(lowerCase.charAt(0), lowerCase.charAt(0).toUpperCase());
+}
+
 function game() {
   for(let i=0; i < 5; i++) {
     let playerSelection = prompt("Rock, Paper and Scissors!");
@@ -40,7 +45,3 @@ function game() {
   }
 }
 
-function normalizeSelection(str) {
-  const lowerCase = str.toLowerCase();
-  return lowerCase.replace(lowerCase.charAt(0), lowerCase.charAt(0).toUpperCase());
-}
