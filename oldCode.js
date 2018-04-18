@@ -4,7 +4,7 @@ function computerPlay() {
 }
 
 
-function singleRound(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
   playerSelection = normalizeSelection(playerSelection);
   computerSelection = normalizeSelection(computerSelection);
 
@@ -41,7 +41,7 @@ function game() {
   for(let i=0; i < 5; i++) {
     let playerSelection = prompt("Rock, Paper and Scissors!");
     let computerSelection = computerPlay();
-    console.log(singleRound(playerSelection, computerSelection));
+    console.log(playRound(playerSelection, computerSelection));
   }
 }
 
