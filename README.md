@@ -1,6 +1,8 @@
-#Rock, Paper, Scissors game.#
+Rock, Paper, Scissors game.
+===========================
 
-##Version list:##
+Version list:
+-------------
 * V0
   * Only the basic javascript functionality. No HTML nor CSS.
 * V1
