@@ -1,7 +1,16 @@
-Rock, Paper, Scissors game.
+Rock, Paper, Scissors game
 ===========================
 
-Version list:
+Objective
+---------
+Create a Rock, Paper, Scissors game. 
+In the first version the game will consist on a set of Javascript functions that can be used 
+to play from the browser's console.
+In the next version a GUI is added to the game, so it can be played directly without using the
+console. There will be several versions of the GUI oriented game.
+
+
+Version list
 -------------
 * V0
   * Only the basic javascript functionality. No HTML nor CSS.
