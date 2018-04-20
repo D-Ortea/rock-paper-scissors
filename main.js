@@ -1,9 +1,9 @@
 //DOM elements
 const playDiv = document.querySelector('#playing-area');
-const scoreDiv = document.querySelector('#score');
+const scoreDiv = document.querySelector('#container').querySelector('div');
 const playButton = document.querySelector('.play');
 let playerBoard, computerBoard;
-let scorePanel, resultPanel;
+let scorePanel, resultPanel, gameResultPanel;
 let continueButton, resetButton;
 let rock, paper, scissors;
 
@@ -28,6 +28,7 @@ function createElements() {
   createOptionSelection();
   createContinueAndResetButtons();
   createResultPanel();
+  createGameResultPanel();
 }
 
 function addListeners() {
@@ -35,13 +36,14 @@ function addListeners() {
   addChoiceListeners();
   addContinueListener();
   addResetListener();
-  addResultPanelListener();
+  addGameResultListener();
 }
 
 function addPlayButtonListener() {
   playButton.addEventListener('click', () => {
     clearPlayingArea(playButton);
-    scoreDiv.appendChild(scorePanel);
+    toggleScoreBoard();
+    updateScoreBoard();
     appendChoiceImages();
   });
 }
@@ -54,9 +56,13 @@ function addChoiceListeners() {
       clearPlayingArea();
       updateSelections(choice.alt);  
 
+      const computerSelection = getComputerSelectionImage(choices);
+      
+      toggleClickableArea(choice.alt, computerSelection.alt);
+
       playDiv.appendChild(
         surroundWithTable(
-          choice, getVSElement(), getComputerSelectionImage(choices)
+          choice, getVSElement(), computerSelection
       ));
 
       const result = playRound();
@@ -73,12 +79,14 @@ function addChoiceListeners() {
 function addContinueListener() {
   continueButton.addEventListener('click', () => {
     const table = playDiv.querySelector('table');
-    clearPlayingArea(table, resultPanel, continueButton, resetButton);
+    clearPlayingArea();
     if (score[0] < 5 && score[1] < 5) {
       appendChoiceImages();
+      toggleClickableArea(playerSelection, computerSelection);
     } else {
-      resultPanel.textContent = (score[PLAYER] === 5) ? 'You Won!' : 'You Lost!';      
-      playDiv.appendChild(resultPanel);
+      const p = gameResultPanel.querySelector('p');
+      p.textContent = (score[PLAYER] === 5) ? 'VICTORY' : 'DEFEAT';      
+      playDiv.appendChild(gameResultPanel);
     }
   });
 }
@@ -87,24 +95,29 @@ function addResetListener() {
   resetButton.addEventListener('click', () => {
     clearPlayingArea();
     resetScore();
+    toggleClickableArea(playerSelection, computerSelection);
+    toggleScoreBoard();
     playDiv.appendChild(playButton);
-    playDiv.removeChild(scorePanel);
   });
 }
 
-function addResultPanelListener() {
-  resultPanel.addEventListener('click', () => {
+function addGameResultListener() {
+  const finishButton = gameResultPanel.querySelector('button');
+  finishButton.addEventListener('click', () => {
     clearPlayingArea();    
     resetScore();
+    toggleClickableArea(playerSelection, computerSelection);
+    toggleScoreBoard();
     playDiv.appendChild(playButton);
-    scoreDiv.removeChild(scorePanel);
   })
 }
 
 function appendChoiceImages() {
-  playDiv.appendChild(rock);
-  playDiv.appendChild(paper);
-  playDiv.appendChild(scissors);
+  const div = document.createElement('div');
+  div.appendChild(rock),
+  div.appendChild(paper);
+  div.appendChild(scissors);
+  playDiv.appendChild(div);
 }
 
 function appendNavOptionButtons() {
@@ -115,11 +128,12 @@ function appendNavOptionButtons() {
 function appendResultElement(result) {
   resultPanel.textContent = result[0];
   resultPanel.classList.add('result');
-  resultPanel.classList.add(
-      (result[1] === WIN) ? 'result-win'
-    : (result[1] === LOSE) ? 'result-lose'
-    : 'result-draw'
-  );
+  resultPanel.classList.remove('result-win', 'result-lose', 'result-draw');
+  let resultClass = (result[1] === WIN) ? 'result-win'
+                  : (result[1] === LOSE) ? 'result-lose'
+                  : 'result-draw';
+
+  resultPanel.classList.add(resultClass);
   playDiv.appendChild(resultPanel);
 }
 
@@ -185,11 +199,11 @@ function createOptionSelection() {
 }
 
 function createContinueAndResetButtons() {
-  const buttonText = ['Continue', 'Reset'];
+  const buttonText = ['CONTINUE', 'RESET'];
   [continueButton, resetButton] = buttonText.map(text => {
     const button = document.createElement('button');
     button.textContent = text;
-    button.classList.add(text.toLowerCase());
+    button.classList.add(text.toLowerCase(), 'action-btn');
     return button
   });
 }
@@ -216,9 +230,8 @@ function createMap(alt) {
 
   const area = document.createElement('area');
   area.shape = 'circle';
-  area.coords = '82,82,82';
+  area.coords = '82,82,72';
   area.alt = alt;
-  area.href = '#';
   area.classList.add('area');
 
   map.appendChild(area);
@@ -227,6 +240,48 @@ function createMap(alt) {
 
 function createResultPanel() {
   resultPanel = document.createElement('p');
+}
+
+function createGameResultPanel() {
+  gameResultPanel = document.createElement('div');
+  const p = document.createElement('p');
+  const button = document.createElement('button');
+
+  p.classList.add('game-result');
+  button.classList.add('game-result-button');
+  button.textContent = 'FINISH';
+
+  gameResultPanel.appendChild(p);
+  gameResultPanel.appendChild(button);
+}
+
+function toggleScoreBoard() {
+  if(scoreDiv.id) {
+    scoreDiv.id = '';    
+    scoreDiv.removeChild(scorePanel);
+  } else  {
+    scoreDiv.id = 'score';
+    scoreDiv.appendChild(scorePanel);
+  }
+}
+
+function toggleClickableArea(playerSelection, computerSelection) {
+  const playerArea = playDiv.querySelector(`area[alt="${playerSelection}"]`);
+  const computerArea = playDiv.querySelector(`area[alt="${computerSelection}"]`);  
+
+  switchCoords(playerArea);
+
+  if(computerSelection !== playerSelection) {
+    switchCoords(computerArea);
+  }
+}
+
+function switchCoords(area) {  
+  if(area.getAttribute('coords') === '0, 0, 0') {
+    area.setAttribute('coords', '82, 82, 72');
+  } else {
+    area.setAttribute('coords', '0, 0, 0');
+  }
 }
 
 function surroundWithTable(playerChoice, vs, computerChoice) {
@@ -250,7 +305,7 @@ function clearPlayingArea(...elements) {
   if (elements.length > 0) {
     children = Array.from(elements);
   } else {
-    children = Array.from(playDiv.querySelectorAll('img, h1, p, button, table'));
+    children = Array.from(playDiv.children).filter(node => node.tagName.toLowerCase() !== 'map');    
   }
 
   children.forEach(child => {
