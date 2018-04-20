@@ -85,7 +85,9 @@ function addContinueListener() {
       toggleClickableArea(playerSelection, computerSelection);
     } else {
       const p = gameResultPanel.querySelector('p');
-      p.textContent = (score[PLAYER] === 5) ? 'VICTORY' : 'DEFEAT';      
+      const result = (score[PLAYER] === 5) ? 'VICTORY' : 'DEFEAT';
+      p.textContent = result;
+      gameResultPanel.classList.add(result.toLowerCase());
       playDiv.appendChild(gameResultPanel);
     }
   });

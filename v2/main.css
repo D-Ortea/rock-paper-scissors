@@ -1,3 +1,5 @@
+/* General Rules */
+
 body {
   background: url('images/bg-img.png');
 }
@@ -12,12 +14,51 @@ img {
   margin: 0 auto;  
 }
 
+
+/* Score Board Rules */
+
 #score {
   border: 2px solid rgb(0, 8, 61);
   border-radius: 8px;
   width: 170px;
   margin: 0 auto;
 }
+
+.score-board {
+  background: rgb(0, 8, 61);
+  font-family: impact, times, serif;
+  font-size: 16px;
+  text-align: center;
+  color: ghostwhite;
+  border-radius: 10px;
+  border-spacing: 20px 0;
+  border: 4px solid rgb(71, 82, 153);
+  padding: 13px 0;
+}
+
+.score-number {
+  border-radius: 10px;
+  border: 2px solid rgb(71, 82, 153);
+  padding: 0;
+}
+
+.col {
+  padding: 0;
+}
+
+.circle {
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+  background-color: rgb(97, 105, 161);
+}
+
+.on {
+  background-color: rgb(255, 205, 0) !important;
+}
+
+
+/* Playing Area Rules */
 
 #playing-area {
   text-align: center;
@@ -34,53 +75,17 @@ img {
   margin: 0 0;
 }
 
-.circle {
-  height: 7px;
-  width: 7px;
-  border-radius: 50%;
-  background-color: rgb(97, 105, 161);
-}
-
-.col {
-  padding: 0;
-}
-
 .area {
   display: inline-block;
 }
 
 .vs {
-  display: inline-block;
-  color: transparent;
-}
-
-.on {
-  background-color: rgb(255, 205, 0) !important;
-}
-
-.score-board {
-  background: rgb(0, 8, 61);
-  font-family: impact, times, serif;
-  font-size: 16px;
-  text-align: center;
-  color: ghostwhite;
-  border-radius: 10px;
-  border-spacing: 20px 0;
-  border: 4px solid rgb(71, 82, 153);;
-  padding: 13px 0;
-}
-
-.score-number {
-  background:  #222;
-  border-radius: 3px;
-  border: 2px solid #666;
-  padding: 0;
+  color: rgb(255, 205, 0);
 }
 
 .result {
   line-height: 35px;
   font-size: 17px;
-  color: ghostwhite;
   margin: 25px 0 35px 0;
   cursor: default;
   background: rgb(0, 8, 61);
@@ -104,12 +109,11 @@ img {
   height: 50px;
   width: 150px;
   margin: 0 70px;
-  cursor: pointer;
   outline: none;
+  cursor: pointer;
   font-size: 13px;  
   border-radius: 20%;
   background: rgb(0, 8, 61);
-  color:  rgb(1, 249, 255);
   border: 4px solid  rgb(71, 82, 153);
 }
 
@@ -117,7 +121,8 @@ img {
   height: 60px;
   width: 180px;
   font-size: 25px;
-  margin-top: 130px;
+  margin-top: 130px;  
+  color:  rgb(1, 249, 255);
 }
 
 .action-btn:hover {
@@ -137,7 +142,6 @@ img {
   line-height: 250px;
   font-size: 80px;
   cursor: default;
-  color: rgb(1, 249, 255);
   background: rgb(0, 8, 61);
   border: 6px solid rgb(71, 82, 153);
   border-radius: 30px;
@@ -154,3 +158,10 @@ img {
   padding: 7px; 
 }
 
+.victory {
+  color: rgb(1, 249, 255);
+}
+
+.defeat {
+  color: rgb(204, 32, 61);
+}
