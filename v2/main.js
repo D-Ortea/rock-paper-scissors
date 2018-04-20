@@ -15,6 +15,9 @@ const BOARD_ROWS = 7;
 const BOARD_COLS = 5;
 const PLAYER = 0;
 const COMPUTER = 1;
+const FULL = [0, BOARD_ROWS * BOARD_COLS - BOARD_COLS];
+const FIRST_HALF = [0, Math.floor(BOARD_ROWS / 2) * BOARD_COLS];
+const SECOND_HALF = [Math.floor(BOARD_ROWS / 2) * BOARD_COLS, BOARD_ROWS * BOARD_COLS - BOARD_COLS];
 
 // Global variables
 let playerSelection, computerSelection;
@@ -54,16 +57,16 @@ function addChoiceListeners() {
     const map = playDiv.querySelector(`area[alt="${choice.alt}"]`);
     map.addEventListener('click', () => {
       clearPlayingArea();
-      updateSelections(choice.alt);  
+      updateSelections(choice.alt);
 
       const computerSelection = getComputerSelectionImage(choices);
-      
+
       toggleClickableArea(choice.alt, computerSelection.alt);
 
       playDiv.appendChild(
         surroundWithTable(
           choice, getVSElement(), computerSelection
-      ));
+        ));
 
       const result = playRound();
 
@@ -106,7 +109,7 @@ function addResetListener() {
 function addGameResultListener() {
   const finishButton = gameResultPanel.querySelector('button');
   finishButton.addEventListener('click', () => {
-    clearPlayingArea();    
+    clearPlayingArea();
     resetScore();
     toggleClickableArea(playerSelection, computerSelection);
     toggleScoreBoard();
@@ -117,7 +120,7 @@ function addGameResultListener() {
 function appendChoiceImages() {
   const div = document.createElement('div');
   div.appendChild(rock),
-  div.appendChild(paper);
+    div.appendChild(paper);
   div.appendChild(scissors);
   playDiv.appendChild(div);
 }
@@ -132,8 +135,8 @@ function appendResultElement(result) {
   resultPanel.classList.add('result');
   resultPanel.classList.remove('result-win', 'result-lose', 'result-draw');
   let resultClass = (result[1] === WIN) ? 'result-win'
-                  : (result[1] === LOSE) ? 'result-lose'
-                  : 'result-draw';
+    : (result[1] === LOSE) ? 'result-lose'
+      : 'result-draw';
 
   resultPanel.classList.add(resultClass);
   playDiv.appendChild(resultPanel);
@@ -258,10 +261,10 @@ function createGameResultPanel() {
 }
 
 function toggleScoreBoard() {
-  if(scoreDiv.id) {
-    scoreDiv.id = '';    
+  if (scoreDiv.id) {
+    scoreDiv.id = '';
     scoreDiv.removeChild(scorePanel);
-  } else  {
+  } else {
     scoreDiv.id = 'score';
     scoreDiv.appendChild(scorePanel);
   }
@@ -269,17 +272,17 @@ function toggleScoreBoard() {
 
 function toggleClickableArea(playerSelection, computerSelection) {
   const playerArea = playDiv.querySelector(`area[alt="${playerSelection}"]`);
-  const computerArea = playDiv.querySelector(`area[alt="${computerSelection}"]`);  
+  const computerArea = playDiv.querySelector(`area[alt="${computerSelection}"]`);
 
   switchCoords(playerArea);
 
-  if(computerSelection !== playerSelection) {
+  if (computerSelection !== playerSelection) {
     switchCoords(computerArea);
   }
 }
 
-function switchCoords(area) {  
-  if(area.getAttribute('coords') === '0, 0, 0') {
+function switchCoords(area) {
+  if (area.getAttribute('coords') === '0, 0, 0') {
     area.setAttribute('coords', '82, 82, 72');
   } else {
     area.setAttribute('coords', '0, 0, 0');
@@ -292,7 +295,7 @@ function surroundWithTable(playerChoice, vs, computerChoice) {
   [playerChoice, vs, computerChoice].forEach(elem => {
     const td = document.createElement('td');
     td.appendChild(elem);
-    if ( elem.tagName.toLowerCase() === 'h1' ) {
+    if (elem.tagName.toLowerCase() === 'h1') {
       td.setAttribute('width', '164px');
     }
     tr.appendChild(td);
@@ -307,7 +310,7 @@ function clearPlayingArea(...elements) {
   if (elements.length > 0) {
     children = Array.from(elements);
   } else {
-    children = Array.from(playDiv.children).filter(node => node.tagName.toLowerCase() !== 'map');    
+    children = Array.from(playDiv.children).filter(node => node.tagName.toLowerCase() !== 'map');
   }
 
   children.forEach(child => {
@@ -331,104 +334,51 @@ function computeScore(result) {
 }
 
 function createZero() {
-  const matrix = [];
-  for (let i = 0; i < BOARD_ROWS; i++) {
-    if (i % (BOARD_ROWS - 1) === 0) {
-      for (let j = 0; j < BOARD_COLS; j++) {
-        matrix[i * BOARD_COLS + j] = true;
-      }
-    } else {
-      matrix[i * BOARD_COLS] = true;
-      matrix[i * BOARD_COLS + BOARD_COLS - 1] = true;
-    }
-  }
-  return matrix;
+  return drawVLines(drawHLines([], [1, 0 ,1]), [1, 1], [FULL, FULL]);
 }
 
 function createOne() {
-  const matrix = [];
-  const lastCol = BOARD_COLS - 1;
-  for (let i = lastCol; i < BOARD_ROWS * BOARD_COLS; i += BOARD_COLS) {
-    matrix[i] = true;
-  }
-  return matrix;
+  return drawVLines([], [0, 1], [0, FULL]);
 }
 
 function createTwo() {
-  const matrix = [];
-  const hLineSeparation = Math.floor(BOARD_ROWS / 2);
-  for (let i = 0; i < BOARD_ROWS; i++) {
-    const offset = i * BOARD_COLS;
-    if (i % hLineSeparation === 0) {
-      for (let j = 0; j < BOARD_COLS; j++) {
-        matrix[offset + j] = true;
-      }
-    } else if (i < Math.floor(BOARD_ROWS / 2)) {
-      matrix[offset + BOARD_COLS - 1] = true;
-    } else {
-      matrix[offset] = true;
-    }
-  }
-
-  return matrix;
+  return drawVLines(drawHLines([], [1, 1, 1]), [1, 1], [SECOND_HALF, FIRST_HALF]);
 }
 
 function createThree() {
-  const matrix = [];
-  const hLineSeparation = Math.floor(BOARD_ROWS / 2);
-  for (let i = 0; i < BOARD_ROWS; i++) {
-    const offset = i * BOARD_COLS;
-    if (i % hLineSeparation === 0) {
-      if (i / hLineSeparation === 1) {
-        for (let j = 1; j < BOARD_COLS; j++) {
-          matrix[offset + j] = true;
-        }
-      } else {
-        for (let j = 0; j < BOARD_COLS; j++) {
-          matrix[offset + j] = true;
-        }
-      }
-    } else {
-      matrix[offset + BOARD_COLS - 1] = true;
-    }
-  }
-
-  return matrix;
+  return drawVLines(drawHLines([], [1, 1, 1], true), [0, 1], [[0, 0], FULL]);
 }
 
 function createFour() {
-  const matrix = [];
-  const hLine = Math.floor(BOARD_ROWS / 2);
-  for (let i = 0; i < BOARD_ROWS; i++) {
-    const offset = i * BOARD_COLS;
-    if (i / (hLine) === 1) {
-      for (let j = 0; j < BOARD_COLS; j++) {
-        matrix[offset + j] = true;
-      }
-    } else if (i < hLine) {
-      matrix[offset] = true;
+  return drawVLines(drawHLines([], [0, 1, 0]), [1, 1], [FIRST_HALF, FULL]);
+}
+
+function createFive() {
+  return drawVLines(drawHLines([], [1, 1, 1]), [1, 1], [FIRST_HALF, SECOND_HALF]);
+}
+
+function drawHLines(matrix, mask, three = false) {
+  const defaults = [0, Math.floor(BOARD_ROWS / 2) * BOARD_COLS, (BOARD_ROWS - 1) * BOARD_COLS];
+  let offsets = defaults.filter((offset, i) => mask[i]);
+  offsets.forEach(offset => {
+    for (let i = offset; i < offset + BOARD_COLS; i++) {
+      matrix[i] = true;
     }
-    matrix[offset + BOARD_COLS - 1] = true;
+  });
+
+  if (three) {
+    matrix[defaults[1]] = false;
   }
 
   return matrix;
 }
 
-function createFive() {
-  const matrix = [];
-  const hLineSeparation = Math.floor(BOARD_ROWS / 2);
-  for (let i = 0; i < BOARD_ROWS; i++) {
-    const offset = i * BOARD_COLS;
-    if (i % hLineSeparation === 0) {
-      for (let j = 0; j < BOARD_COLS; j++) {
-        matrix[offset + j] = true;
-      }
-    } else if (i < Math.floor(BOARD_ROWS / 2)) {
-      matrix[offset] = true;
-    } else {
-      matrix[offset + BOARD_COLS - 1] = true;
+function drawVLines(matrix, offsets, range) {
+  offsets.forEach((offset, line) => {
+    for (let i = range[line][0]; i <= range[line][1]; i+=BOARD_COLS) {
+      matrix[i + ((BOARD_COLS - 1) * line)] = true;
     }
-  }
+  });
 
   return matrix;
 }
