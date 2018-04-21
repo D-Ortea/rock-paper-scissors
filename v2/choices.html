@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Choose Rock, Paper, Scissors</title>
+  <link rel="stylesheet" href="main.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div id="score">
+      <table class="score-board">
+        <tr>
+          <td>PLAYER</td>
+          <td>CPU</td>
+        </tr>
+        <tr>
+          <td class="score-number"></td>
+          <td class="score-number"></td>
+        </tr>
+      </table>
+    </div>
+    <div id="playing-area">
+      <map name="choiceMapRock">
+        <area class="area" shape="circle" coords="82,82,72" href="" alt="Rock">
+      </map>
+
+      <map name="choiceMapPaper">
+        <area class="area" shape="circle" coords="82,82,72" href="" alt="Pape">
+      </map>
+
+      <map  name="choiceMapScissors">
+        <area class="area" shape="circle" coords="82,82,72" href="" alt="Scissors">
+      </map>
+      <div>
+        <img class="choice "src="./images/rock.png" alt="Rock" usemap="#choiceMapRock">
+        <img class="choice "src="./images/paper.png" alt="Paper" usemap="#choiceMapPaper">
+        <img class="choice "src="./images/scissors.png" alt="Scissors" usemap="#choiceMapScissors">
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>  
+</body>
+</html>
