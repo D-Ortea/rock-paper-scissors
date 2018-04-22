@@ -41,7 +41,8 @@ function game() {
   for(let i=0; i < 5; i++) {
     let playerSelection = prompt("Rock, Paper and Scissors!");
     let computerSelection = computerPlay();
-    console.log(playRound(playerSelection, computerSelection));
+    alert(playRound(playerSelection, computerSelection));
   }
 }
 
+game();
