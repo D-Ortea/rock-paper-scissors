@@ -23,8 +23,9 @@ const SECOND_HALF = [Math.floor(BOARD_ROWS / 2) * BOARD_COLS, BOARD_ROWS * BOARD
 let playerSelection, computerSelection;
 let score = [0, 0];
 
-createElements();
-addListeners();
+
+// createElements();
+// addListeners();
 
 function createElements() {
   createScorePanel();
@@ -42,13 +43,8 @@ function addListeners() {
   addGameResultListener();
 }
 
-function addPlayButtonListener() {
-  playButton.addEventListener('click', () => {
-    clearPlayingArea(playButton);
-    toggleScoreBoard();
-    updateScoreBoard();
-    appendChoiceImages();
-  });
+function goToChoices() {
+  window.location.assign('./choices.html');
 }
 
 function addChoiceListeners() {
@@ -117,14 +113,6 @@ function addGameResultListener() {
   })
 }
 
-function appendChoiceImages() {
-  const div = document.createElement('div');
-  div.appendChild(rock),
-    div.appendChild(paper);
-  div.appendChild(scissors);
-  playDiv.appendChild(div);
-}
-
 function appendNavOptionButtons() {
   playDiv.appendChild(continueButton);
   playDiv.appendChild(resetButton);
@@ -159,16 +147,9 @@ function getVSElement() {
 }
 
 function createScorePanel() {
-  scorePanel = document.createElement('table');
-  const firstRow = document.createElement('tr');
-  const secondRow = document.createElement('tr');
-  const playerHeader = document.createElement('td');
-  const computerHeader = document.createElement('td');
-  playerBoard = document.createElement('td');
-  computerBoard = document.createElement('td');
-
-  playerHeader.textContent = 'PLAYER';
-  computerHeader.textContent = 'CPU';
+  scorePanel = document.querySelector('.score-board');
+  playerBoard = document.querySelector('.player-score');
+  computerBoard = document.querySelector('.computer-score');
 
   [playerBoard, computerBoard].forEach(board => {
     const table = document.createElement('table');
@@ -186,17 +167,6 @@ function createScorePanel() {
     }
     board.appendChild(table);
   });
-
-  firstRow.appendChild(playerHeader);
-  firstRow.appendChild(computerHeader);
-  secondRow.appendChild(playerBoard);
-  secondRow.appendChild(computerBoard);
-  scorePanel.appendChild(firstRow);
-  scorePanel.appendChild(secondRow);
-
-  scorePanel.classList.add('score-board');
-  playerBoard.classList.add('score-number');
-  computerBoard.classList.add('score-number');
 }
 
 function createOptionSelection() {
