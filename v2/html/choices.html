@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <title>Choose Rock, Paper, Scissors</title>
-  <link rel="stylesheet" href="main.css" type="text/css">
+  <link rel="stylesheet" href="../main.css" type="text/css">
 </head>
-<body onload="loadChoicesElements()">
+<body>
   <div id="container">
     <div id="score">
       <table class="score-board">
@@ -32,12 +32,14 @@
         <area class="area" shape="circle" coords="82,82,72" href="./round-results.html" alt="Scissors">
       </map>
       <div>
-        <img class="choice "src="./images/rock.png" alt="Rock" usemap="#choiceMapRock">
-        <img class="choice "src="./images/paper.png" alt="Paper" usemap="#choiceMapPaper">
-        <img class="choice "src="./images/scissors.png" alt="Scissors" usemap="#choiceMapScissors">
+        <img class="choice "src="../images/rock.png" alt="Rock" usemap="#choiceMapRock">
+        <img class="choice "src="../images/paper.png" alt="Paper" usemap="#choiceMapPaper">
+        <img class="choice "src="../images/scissors.png" alt="Scissors" usemap="#choiceMapScissors">
       </div>
     </div>
   </div>
-  <script src="main.js"></script>  
+  <script src="../js/game-logic.js"></script>
+  <script src="../js/score-generation.js"></script>
+  <script src="../js/choices.js"></script>  
 </body>
 </html>
