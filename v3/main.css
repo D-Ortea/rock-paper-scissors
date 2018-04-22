@@ -1,0 +1,169 @@
+/* General Rules */
+
+body {
+  background: rgb(0, 8, 61) url('images/bg-img.png');
+}
+
+img {
+  height: 130px;
+}
+
+#container {
+  margin-top: 20px;  
+  width: 700px;
+  margin: 0 auto;  
+}
+
+
+/* Score Board Rules */
+
+#score {
+  border: 2px solid rgb(0, 8, 61);
+  border-radius: 8px;
+  width: 170px;
+  margin: 0 auto;
+}
+
+.score-board {
+  background: rgb(0, 8, 61);
+  font-family: impact, times, serif;
+  font-size: 16px;
+  text-align: center;
+  color: ghostwhite;
+  border-radius: 10px;
+  border-spacing: 20px 0;
+  border: 4px solid rgb(71, 82, 153);
+  padding: 13px 0;
+}
+
+.score-number {
+  border-radius: 10px;
+  border: 2px solid rgb(71, 82, 153);
+  padding: 0;
+}
+
+.col {
+  padding: 0;
+}
+
+.circle {
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+  background-color: rgb(97, 105, 161);
+}
+
+.on {
+  background-color: rgb(255, 205, 0) !important;
+}
+
+
+/* Playing Area Rules */
+
+#playing-area {
+  text-align: center;
+  padding-top: 50px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+#playing-area img {
+  margin: 0 10%;
+}
+
+#playing-area table img {
+  margin: 0 0;
+}
+
+.area {
+  display: inline-block;
+  outline-style: none;  
+}
+
+.vs {
+  color: rgb(255, 205, 0);
+  width: 164px;
+}
+
+.result {
+  line-height: 35px;
+  font-size: 17px;
+  margin: 25px 0 35px 0;
+  cursor: default;
+  background: rgb(0, 8, 61);
+  border: 4px solid  rgb(71, 82, 153);
+  border-radius: 10px;
+}
+
+.result-lose {
+  color: rgb(204, 32, 61);;
+}
+
+.result-win {
+  color:  rgb(1, 249, 255);
+}
+
+.result-draw {
+  color: rgb(255, 205, 0);
+}
+
+.action-btn {
+  height: 50px;
+  width: 150px;
+  margin: 0 70px;
+  outline: none;
+  cursor: pointer;
+  font-size: 13px;  
+  border-radius: 20%;
+  background: rgb(0, 8, 61);
+  border: 4px solid  rgb(71, 82, 153);
+}
+
+.action-btn.play {
+  height: 60px;
+  width: 180px;
+  font-size: 25px;
+  margin-top: 130px;  
+  color:  rgb(1, 249, 255);
+}
+
+.action-btn:hover {
+  color:  rgb(71, 82, 153);
+}
+
+.continue {
+  color: rgb(255, 205, 0);
+}
+
+.reset {
+  color: rgb(204, 32, 61);
+}
+
+.game-result {
+  margin: 0;
+  line-height: 250px;
+  font-size: 80px;
+  cursor: default;
+  background: rgb(0, 8, 61);
+  border: 6px solid rgb(71, 82, 153);
+  border-radius: 30px;
+}
+
+.game-result-button {
+  cursor: pointer;
+  background: rgb(0, 8, 61);
+  color: rgb(255, 205, 0);
+  border: 6px solid rgb(71, 82, 153);
+  border-top-style: none;
+  border-radius: 0 0 10px 10px;
+  font-size: 18px;
+  padding: 7px; 
+}
+
+.victory {
+  color: rgb(1, 249, 255);
+}
+
+.defeat {
+  color: rgb(204, 32, 61);
+}

@@ -33,4 +33,7 @@ Version list
     * Four files for each of the HTML files, in charge of adding listeners and some DOM manipulations
   * Some minor changes to V1's main.css
 * V3
- * In progress
+  * New algorithm for drawing the score, based on simple Linear Algebra matrix transformations.
+  This algorithm is more versatile and only needs the smallest matrix, 5x3, to draw any number 
+  at higher matrix sizes.
+  * In progress
