@@ -14,10 +14,23 @@ From the Odin project's [curriculum](https://www.theodinproject.com/courses/web-
 Version list
 -------------
 * V0
-  * Only the basic javascript functionality. No HTML nor CSS.
+  * Only the basic javascript functionality in charge of the game's logic
+  * Index.html without elements
+  * No CSS
 * V1
+  * Basic scoreboard's algorithm. Each number has it's own formula for drawing itself in any matrix size that is bigger than 5x3
   * Almost no HTML, only three containing divs and one button.
   * Used javascript DOM manipulation to create, delete, edit HTML elements and add/remove styling already defined in CSS file.
   * Used CSS for styling.
 * V2
-  * In progress.
+  * Changed scoreboard's algorithm. Now it uses two methods that draw vertical and horizontal lines, and each
+  of the numbers specifies how to draw themselves specifying the number of lines they have and how many points
+  each line spans
+  * Divided the game into four separate HTML files.
+  * Divided the Javascript into six files:
+    * One controls the scoreboard, creating both the matrix of circles and generating the numbers
+    * One file for the game's logic
+    * Four files for each of the HTML files, in charge of adding listeners and some DOM manipulations
+  * Some minor changes to V1's main.css
+* V3
+ * In progress
