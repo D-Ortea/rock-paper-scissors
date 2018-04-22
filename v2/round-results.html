@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Round Results</title>
+  <link type="text/css" href="main.css" rel="stylesheet">
+</head>
+<body onload="loadRoundResultElements()">
+  <div id="container">
+    <div id="score">
+      <table class="score-board">
+        <tr>
+          <td>PLAYER</td>
+          <td>CPU</td>
+        </tr>
+        <tr>
+          <td class="score-number player-score"></td>
+          <td class="score-number computer-score"></td>
+        </tr>
+      </table>
+    </div>
+    <div id="playing-area">
+      <table align="center">
+        <tr>
+          <td><img class="choice player-choice" src="" alt=""></td>
+          <td><h1 class="vs">VS</h1></td>
+          <td><img class="choice computer-choice" src="" alt=""></td>
+        </tr>
+      </table>
+      <p class="result"></p>
+      <button class="action-btn continue">CONTINUE</button>
+      <button class="action-btn reset">RESET</button>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>

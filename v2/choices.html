@@ -5,7 +5,7 @@
   <title>Choose Rock, Paper, Scissors</title>
   <link rel="stylesheet" href="main.css" type="text/css">
 </head>
-<body>
+<body onload="loadChoicesElements()">
   <div id="container">
     <div id="score">
       <table class="score-board">
@@ -21,15 +21,15 @@
     </div>
     <div id="playing-area">
       <map name="choiceMapRock">
-        <area class="area" shape="circle" coords="82,82,72" href="" alt="Rock">
+        <area class="area" shape="circle" coords="82,82,72" href="./round-results.html" alt="Rock">
       </map>
 
       <map name="choiceMapPaper">
-        <area class="area" shape="circle" coords="82,82,72" href="" alt="Pape">
+        <area class="area" shape="circle" coords="82,82,72" href="./round-results.html" alt="Paper">
       </map>
 
       <map  name="choiceMapScissors">
-        <area class="area" shape="circle" coords="82,82,72" href="" alt="Scissors">
+        <area class="area" shape="circle" coords="82,82,72" href="./round-results.html" alt="Scissors">
       </map>
       <div>
         <img class="choice "src="./images/rock.png" alt="Rock" usemap="#choiceMapRock">
