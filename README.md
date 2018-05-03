@@ -9,6 +9,8 @@ to play from the browser's console.
 In the next version a GUI is added to the game, so it can be played directly without using the
 console. There will be several versions of the GUI oriented game.
 
+Try it out here [View in browser](https://d-ortea.github.io/rock-paper-scissors/v1/index.html)
+
 From the Odin project's [curriculum](https://www.theodinproject.com/courses/web-development-101/lessons/rock-paper-scissors "The Odin Project")
 
 Version list
